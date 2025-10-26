@@ -1,0 +1,30 @@
+services:
+  teamspeak:
+    image: teamspeak
+    container_name: teamspeak-server
+    ports:
+      - "9987:9987/udp"
+      - "10011:10011"
+      - "30033:30033"
+    environment:
+      - TS3SERVER_DB_PLUGIN=ts3db_mariadb
+      - TS3SERVER_DB_SQLCREATEPATH=create_mariadb
+      - TS3SERVER_DB_HOST=db
+      - TS3SERVER_DB_USER=ts3user
+      - TS3SERVER_DB_PASSWORD=password
+      - TS3SERVER_DB_NAME=teamspeakdb
+      - TS3SERVER_DB_WAITUNTILREADY=50
+      - TS3SERVER_LICENSE=accept
+    depends_on:
+      - db
+    restart: unless-stopped
+    stop_grace_period: 0s
+  db:
+    image: mariadb:10.5.27
+    restart: unless-stopped
+    stop_grace_period: 0s
+    environment:
+      - MARIADB_ROOT_PASSWORD=password
+      - MARIADB_DATABASE=teamspeakdb
+      - MARIADB_USER=ts3user
+      - MARIADB_PASSWORD=password
