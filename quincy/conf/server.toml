@@ -1,0 +1,10 @@
+name = "tun0"
+certificate_file = "/etc/quincy/certs/cert.pem"
+certificate_key_file = "/etc/quincy/certs/cert-key.pem"
+tunnel_network = "10.1.1.1/24"
+[authentication]
+users_file = "/etc/quincy/users"
+[connection]
+mtu = 1400
+[log]
+level = "debug"

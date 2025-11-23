@@ -1,0 +1,15 @@
+services:
+  quincy:
+    image: m0dex/quincy:latest
+    stop_grace_period: 0s
+    user: "0"
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    ports:
+      - "55555:55555/udp"
+    volumes:
+      - "./conf/:/etc/quincy/"
+    command: >
+      quincy-server --config-path /etc/quincy/server.toml

@@ -1,0 +1,16 @@
+connection_string = "127.0.0.1:55555"
+[authentication]
+username = "test"
+password = "test"
+trusted_certificates = ["cert.pem"]
+[connection]
+mtu = 1400
+[network]
+routes = [
+    "0.0.0.0/0"
+]
+dns_servers = [
+    "8.8.8.8"
+]
+[log]
+level = "info"
