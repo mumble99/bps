@@ -1,0 +1,23 @@
+services:
+  pwpush:
+    image: pglombardo/pwpush:latest
+    ports:
+      - 127.0.0.1:8009:80
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5100/up"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    environment:
+      PWPUSH_MASTER_KEY: 'REPLACE_KEY'
+      PWP__ENABLE_LOGINS: false
+      PWP__ENABLE_FILE_PUSHES: true
+      PWP__FILES__STORAGE: local
+      PWP__ENABLE_QR_PUSHES: true
+      PWP__ENABLE_URL_PUSHES: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"

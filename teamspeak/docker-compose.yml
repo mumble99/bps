@@ -28,3 +28,7 @@ services:
       - MARIADB_DATABASE=teamspeakdb
       - MARIADB_USER=ts3user
       - MARIADB_PASSWORD=password
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
