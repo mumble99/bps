@@ -1,0 +1,17 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    command:
+      - serve
+    environment:
+      - TZ=UTC
+    volumes:
+      - ./server.yml:/etc/ntfy/server.yml:ro
+    ports:
+      - 8010:80
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
