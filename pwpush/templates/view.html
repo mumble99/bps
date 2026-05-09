@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>...</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Inter, sans-serif;
+        }
+
+        body {
+            background: #0f172a;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 800px;
+            background: #111827;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 40px rgba(0,0,0,.4);
+        }
+
+        h1 {
+            margin-bottom: 24px;
+            font-size: 30px;
+        }
+
+        .data-box {
+            position: relative;
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 14px;
+            padding: 24px;
+            min-height: 220px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-size: 15px;
+            line-height: 1.6;
+            cursor: pointer;
+            user-select: text;
+            overflow: hidden;
+        }
+
+        .data-box.blurred::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.15);
+            pointer-events: none;
+        }
+
+        .hint {
+            margin-top: 12px;
+            opacity: .7;
+            font-size: 14px;
+        }
+
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .error {
+            background: #7f1d1d;
+        }
+
+        .success {
+            background: #065f46;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Держи секретик</h1>
+
+    {% if filename %}
+    <div id="dataBox" class="data-box blurred" type="{{data_type}}" filename="{{filename}}">
+    {% else %}
+    <div id="dataBox" class="data-box blurred" type="{{data_type}}">
+    {% endif %}
+        {{b64_data}}
+    </div>
+
+    <div class="hint">
+        Нажмите на данные, чтобы отобразить или скрыть их.
+    </div>
+
+    <div class="actions">
+        <button id="copyBtn">Скопировать</button>
+    </div>
+
+    <div id="message" class="message"></div>
+</div>
+
+<script src="/static/view.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>...</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Inter, sans-serif;
+        }
+
+        body {
+            background: #0f172a;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 700px;
+            background: #111827;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 40px rgba(0,0,0,.4);
+        }
+
+        h1 {
+            margin-bottom: 24px;
+            font-size: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        textarea,
+        input,
+        select {
+            width: 100%;
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        input[type=file] {
+            padding: 10px;
+        }
+
+        button {
+            margin-top: 28px;
+            width: 100%;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 16px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 14px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .success {
+            background: #065f46;
+        }
+
+        .error {
+            background: #7f1d1d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Расскажи свой секретик</h1>
+
+    <label>Введи секрет</label>
+    <textarea id="textData" placeholder="Enter text..."></textarea>
+
+    <label>Прикрепи секрет</label>
+    <input type="file" id="fileInput">
+
+    <label>Время истечения</label>
+    <select id="expire">
+        <option value="1">1 День</option>
+        <option value="2">2 Дня</option>
+        <option value="3">3 Дня</option>
+        <option value="4">4 Дня</option>
+        <option value="5">5 Дней</option>
+        <option value="6">6 Дней</option>
+        <option value="7">7 Дней</option>
+    </select>
+
+    <label>Количество просмотров</label>
+    <input type="number" id="viewCount" value="1" min="1">
+
+    <button id="submitBtn">Создать секрет</button>
+
+    <div id="message" class="message"></div>
+</div>
+
+<script src="/static/save.js"></script>
+</body>
+</html>
