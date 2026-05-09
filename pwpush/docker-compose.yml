@@ -14,9 +14,10 @@ services:
   redis:
     image: redis:latest
     stop_grace_period: 0s
-    resources:
-    limits:
-      memory: 1GB
+    deploy:
+      resources:
+        limits:
+          memory: 1GB
     logging:
       driver: "json-file"
       options:
