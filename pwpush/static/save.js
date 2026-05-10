@@ -4,6 +4,9 @@ const textData = document.getElementById("textData");
 const expire = document.getElementById("expire");
 const viewCount = document.getElementById("viewCount");
 const messageBox = document.getElementById("message");
+const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+const passwordContainer = document.getElementById("passwordContainer");
+const passwordInput = document.getElementById("passwordInput");
 
 function showMessage(text, type = "success") {
     messageBox.style.display = "block";
@@ -67,6 +70,12 @@ submitBtn.addEventListener("click", async () => {
             payload["filename"] = fileName;
         }
 
+        const password = passwordInput.value.trim();
+
+        if (password.length > 0) {
+            payload["password"] = password;
+        }
+
         const response = await fetch("/create-secret", {
             method: "POST",
             headers: {
@@ -105,4 +114,14 @@ submitBtn.addEventListener("click", async () => {
     } catch (err) {
         showMessage("Something went wrong", "error");
     }
+});
+
+togglePasswordBtn.addEventListener("click", () => {
+    const hidden = passwordContainer.style.display === "none";
+
+    passwordContainer.style.display = hidden ? "block" : "none";
+
+    togglePasswordBtn.innerText = hidden
+        ? "Убрать пароль"
+        : "Добавить пароль";
 });
