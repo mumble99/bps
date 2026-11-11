@@ -1,0 +1,33 @@
+# docker run -it --rm -v ./synapse-data:/data -e SYNAPSE_SERVER_NAME= -e SYNAPSE_REPORT_STATS=no matrixdotorg/synapse:latest generate
+# docker compose exec -it synapse register_new_matrix_user -c /data/homeserver.yaml -u USER -p 'PASS'
+services:
+  synapse:
+    image: docker.io/matrixdotorg/synapse:latest
+    restart: unless-stopped
+    environment:
+      - SYNAPSE_CONFIG_PATH=/data/homeserver.yaml
+      - SYNAPSE_REPORT_STATS=no
+    ports:
+      - 127.0.0.1:8008:8008
+    volumes:
+      - ./synapse_data:/data
+    depends_on:
+      - db
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+  db:
+    image: docker.io/postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=synapse
+      - POSTGRES_PASSWORD=synapse
+      - POSTGRES_DB=synapse_db
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"

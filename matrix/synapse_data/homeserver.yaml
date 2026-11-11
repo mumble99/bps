@@ -1,0 +1,33 @@
+server_name: ""
+pid_file: /data/homeserver.pid
+listeners:
+  - port: 8008
+    resources:
+    - compress: false
+      names:
+      - client
+      - federation
+    tls: false
+    type: http
+    x_forwarded: true
+database:
+  name: psycopg2
+  args:
+    user: synapse
+    password: synapse
+    dbname: synapse_db
+    host: db
+    cp_min: 5
+    cp_max: 10
+log_config: "
+media_store_path: /data/media_store
+registration_shared_secret: ""
+report_stats: false
+macaroon_secret_key: ""
+form_secret: ""
+signing_key_path: ""
+trusted_key_servers:
+  - server_name: "matrix.org"
+
+
+# vim:ft=yaml
